@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template,flash,redirect
+from flask import render_template,flash,redirect,request
 from app.forms import LoginForm
 
 
@@ -23,6 +23,7 @@ def index():
 
 @app.route("/login",methods=['GET','POST'])
 def login():
+    print(request.form)
     form=LoginForm()
     """ the form.validate ensures that the constrainnts are enforced properly over the input fields """
     if form.validate_on_submit():
@@ -30,4 +31,12 @@ def login():
             form.username.data, form.remember_me.data))
         return redirect('/index')
     return render_template('login.html',title='Sign In',form=form)
+
+
+
+"""  Flask-WTF Populates form Automatically
+form.validate_on_submit() does two things:
+Checks if the request is a POST request.
+Validates and populates the form fields from request.form. """
+
          
