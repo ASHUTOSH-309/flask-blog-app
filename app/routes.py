@@ -24,6 +24,7 @@ def index():
 @app.route("/login",methods=['GET','POST'])
 def login():
     form=LoginForm()
+    """ the form.validate ensures that the constrainnts are enforced properly over the input fields """
     if form.validate_on_submit():
         flash('Login requested for user {}, remember_me={}'.format(
             form.username.data, form.remember_me.data))
